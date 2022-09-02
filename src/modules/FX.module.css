@@ -1,0 +1,10 @@
+.hover {
+  background: 
+      linear-gradient(currentColor 0 0) 
+      bottom /var(--d, 20%) 1px 
+      no-repeat;
+  transition:0.5s;
+}
+.hover:hover {
+  --d: 80%;
+}

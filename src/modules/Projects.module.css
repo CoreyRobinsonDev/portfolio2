@@ -1,0 +1,40 @@
+.container {
+  display: grid;
+  grid-template-columns: 80vw 5vw;
+  place-items: center;
+  margin: 0 10vw;
+}
+
+.projects {
+  display: grid;
+  grid-template: 1fr 1fr / 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.title_container {
+  transform: rotate(90deg);
+  border-bottom: 1px solid;
+  letter-spacing: 1rem;
+  width: 120rem;
+}
+
+.title {
+  position: relative;
+  bottom: -1.3rem;
+  background-color: white;
+}
+
+@media only screen and (max-width: 820px) {
+  .title_container {
+    display: none;
+  }
+
+  .container {
+    display: flex;
+    margin: 0;
+  }
+  .projects {
+    display: flex;
+    flex-direction: column;
+  }
+}
