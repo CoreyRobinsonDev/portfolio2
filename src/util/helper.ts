@@ -1,13 +1,12 @@
 
 export const create = (key: string, value: any) => {
-  localStorage.setItem(key, value);
+  localStorage.setItem(key, JSON.stringify(value));
 
-  return { [key]: value };
+  return localStorage[key];
 }
 
-export const get = (key: string | null) => {
-  if (!key) return null;
-  const item = localStorage.getItem(key);
+export const get = (key: string) => {
+  const item = localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)!) : null;
   
   return item;
 }
@@ -22,23 +21,22 @@ export const clear = () => {
 
 
 export class CLI {
-  path: string[] | null | undefined;
-  history: string[] | null | undefined;
-  currentDir: string;
+    path: string[];
+    history: { command: string, output: string[] }[];
+    currentDir: string;
 
   constructor() {
-    this.path = get("path") !== null ? get("path")?.split("/") : ["~"];
-    this.history = [];
-    this.currentDir = this.path![this.path ? this.path?.length - 1 : 0];
+    this.path = get("path") ? get("path") : create("path", ["~"]);
+    this.history = get("history") ? get("history") : [];
+    this.currentDir = create("currentDir", this.path[this.path.length - 1]);
   }
 
   updatePath() {
-    create("path", this.path?.join("/"));
+    create("path", this.path);
   }
 
   updateHistory() {
-    const history = get("history") !== null ? get("history") : "";
-    create("history", `${history}${history ? "|" : ""}${this.history}`);
+    create("history", this.history);
   }
 
   updateCurrentDir() {
@@ -50,20 +48,24 @@ export class CLI {
   }
   
   cd(dir: string | null) {
-    if (!dir) return create("path", "~");
+    if (!dir) {
+      create("path", ["~"])
+      return "";
+    };
     const dirArr = dir?.split("/");
-    
+
     for (const directory of dirArr) {
       if (directory === "..") {
         if (this.path?.length === 1) continue;
         this.path?.pop();
       } else {
-        this.path?.push(directory)
-        if (get(this.path!.join("/"))) continue;
+        this.path.push(directory);
       }
     }
+
     this.updatePath();
     this.updateCurrentDir();
+    return "";
   }
 
   mkdir(dir: string) {
@@ -74,12 +76,11 @@ export class CLI {
   
   parseCommand(commandString: string) {
     const [command, value1, value2] = commandString.split(" ");
-    let output: string | string[] | null;
+    let output: string[];
     
     switch (command) {
       case "cd":
-        this.cd(value1);
-        output = "";
+        output = [this.cd(value1)];
         break;
       case "help":
         output = [
@@ -105,20 +106,19 @@ export class CLI {
         break;
       case "clear":
         remove("history");
-        output = "";
+        output = [""];
         break;
       case "pwd":
-        output = get("path") ? get("path") : "~";
+        output = get("path") ? [get("path")] : ["~"];
         break;
       case "mkdir":
         this.mkdir(value1);
-        output = "";
+        output = [""];
         break;
       default:
-        output = `bash: ${command}: command not found`;
-        this.output(output);
+        output = [`bash: ${command}: command not found`];
       }
-    if (command !== "clear") this.history?.push(`${commandString}, ${output}`);
+    if (command !== "clear") this.history.push({command: `${command} ${value1 ? value1 : ""} ${value2 ? value2 : ""}`, output});
     this.updateHistory();
   }
 }

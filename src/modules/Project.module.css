@@ -74,7 +74,7 @@
   color: var(--text-color);
 }
 
-@media only screen and (max-width: 820px) {
+@media only screen and (max-width: 1000px) {
   .tech_title, .tech_title--main {
     display: none;
   }

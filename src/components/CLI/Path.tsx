@@ -1,7 +1,7 @@
 import { get } from "../../util/helper";
 
 const Path = () => {
-  const path = get("path");
+  const path = get("path").join("/");
 
   return <p>{path}{">"}</p>
 }

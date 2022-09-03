@@ -1,21 +1,20 @@
 import { get } from "../../util/helper";
 
+type History = {
+  command: string,
+  output: string[]
+}
 const Output = () => {
-  const history = get("history")?.split("|").map(line => line.split(","));
-
-  console.log(get("history")?.split("|").map(line => line.split(",")))
+  const history: History[] = get("history").reverse();
+  
 
   return <>
-    {history?.reverse().map((line, key) => {
-      const [command, ...output] = line;
-    
-      return <div key={key}>
-        <p>$ {command}</p>
-        {output?.map((item, key2) => <p key={key2}>{item}</p>)}
-      </div>
-    })
+    {
+      history?.map((line, key) => <span key={key}>
+        <p>$ {line?.command}</p>
+        {line.output?.map((item, key2) => <p key={key2}>{item}</p>)}
+      </span>)
     }
-    
   </>
 }
 export default Output;

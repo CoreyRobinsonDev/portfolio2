@@ -36,7 +36,7 @@ export const projects = [
     code: "https://github.com/CoreyRobinsonDev/mars-gallery",
     description: "A simple web app for searching photos taken on Mars using NASA's Mars Rover Photos api.",
     tech: {
-      frontend: ["React", "TypeScript", "Emotion CSS"],
+      frontend: ["React", "TypeScript", "Emotion"],
       backend: [],
       tools: ["NASA Mars Rover API"]
     }
