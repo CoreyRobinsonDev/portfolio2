@@ -5,8 +5,7 @@ type History = {
   output: string[]
 }
 const Output = () => {
-  const history: History[] = get("history").reverse();
-  
+  const history: History[] = get("history")?.reverse();
 
   return <>
     {

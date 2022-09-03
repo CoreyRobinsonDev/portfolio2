@@ -29,6 +29,7 @@ export class CLI {
     this.path = get("path") ? get("path") : create("path", ["~"]);
     this.history = get("history") ? get("history") : [];
     this.currentDir = create("currentDir", this.path[this.path.length - 1]);
+    if (!get("~")) create("~", "");
   }
 
   updatePath() {
@@ -49,7 +50,7 @@ export class CLI {
   
   cd(dir: string | null) {
     if (!dir) {
-      create("path", ["~"])
+      create("path", ["~"]);
       return "";
     };
     const dirArr = dir?.split("/");
@@ -62,6 +63,20 @@ export class CLI {
         this.path.push(directory);
       }
     }
+
+    let path: any = this.path;
+    path = path.join("/");
+    let isEqual = false;
+
+    for (const key of Object.keys(localStorage)) {
+      if (path === key) {
+        isEqual = true;
+        break;
+      }
+    }
+
+    if (!isEqual) return `bash: cd: ${dir}: No such file or directory`;
+
 
     this.updatePath();
     this.updateCurrentDir();
@@ -79,6 +94,9 @@ export class CLI {
     let output: string[];
     
     switch (command) {
+      case "":
+        output = [""];
+        break;
       case "cd":
         output = [this.cd(value1)];
         break;
@@ -101,11 +119,16 @@ export class CLI {
           "head <file> - output first 10 lines of <file>",
           "tail <file> - output last 10 lines of <file>",
           "date - show the current date and time",
-          "clear - clear commands"
+          "clear - clear commands",
+          "localClear - clear local history"
         ]
         break;
       case "clear":
         remove("history");
+        output = [""];
+        break;
+      case "localClear":
+        clear();
         output = [""];
         break;
       case "pwd":
@@ -115,10 +138,14 @@ export class CLI {
         this.mkdir(value1);
         output = [""];
         break;
+      
       default:
         output = [`bash: ${command}: command not found`];
-      }
-    if (command !== "clear") this.history.push({command: `${command} ${value1 ? value1 : ""} ${value2 ? value2 : ""}`, output});
-    this.updateHistory();
+    }
+    
+    if (command !== "clear" && command !== "localClear") {
+      this.history.push({ command: `${command} ${value1 ? value1 : ""} ${value2 ? value2 : ""}`, output });
+      this.updateHistory();
+    }
   }
 }
