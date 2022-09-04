@@ -10,8 +10,8 @@ import './App.css';
 function App() {
   return <>
     <CLI/>
-    <Header />
     <main>
+    <Header />
       <About/>
       <Projects />
       <Skills />

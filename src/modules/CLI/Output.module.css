@@ -1,0 +1,12 @@
+.container {
+
+}
+
+.line {
+  display: flex;
+  gap: 1rem;
+}
+
+.line__path {
+  color: var(--green);
+}

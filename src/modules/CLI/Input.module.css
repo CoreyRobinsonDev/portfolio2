@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  gap: 1rem;
+}
+
+.path {
+  color: var(--green);
+}
+
+.input {
+  background-color: var(--bg);
+  color: var(--fg);
+  border: none;
+  outline: none;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 2rem;
+}

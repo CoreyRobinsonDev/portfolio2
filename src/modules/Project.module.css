@@ -28,6 +28,8 @@
   margin-top: 2rem;
   border: 1px dashed var(--border-color);
   border-radius: var(--border-radius);
+  background-image: none;
+  background-color: var(--bg-color);
 }
 
 .title, .title--main {

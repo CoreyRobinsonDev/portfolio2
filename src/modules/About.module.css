@@ -22,7 +22,6 @@
 
 .title_container {
   transform: rotate(90deg);
-  border-bottom: 1px solid;
   letter-spacing: 1rem;
   width: 10rem;
 }
@@ -30,7 +29,6 @@
 .title {
   position: relative;
   bottom: -1.3rem;
-  background-color: var(--main-bg-color);
 }
 
 .link_container {

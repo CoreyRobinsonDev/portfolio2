@@ -21,13 +21,13 @@
   transform: rotate(90deg);
   border-bottom: 1px solid;
   letter-spacing: 1rem;
-  width: 50rem;
+  width: 30rem;
 }
 
 .title {
   position: relative;
   bottom: -1.3rem;
-  background-color: var(--main-bg-color);
+  left: -12rem;
 }
 
 .skills_container {
@@ -86,9 +86,6 @@
   .container div div {
     align-items: flex-start;
     padding: 0;
-    margin: 0;
-  }
-  .skills_container {
     margin: 0;
   }
   .skills_title {

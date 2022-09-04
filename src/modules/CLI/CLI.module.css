@@ -8,9 +8,12 @@
   --comment: #a0a1a7;
   display: flex;
   flex-direction: column-reverse;
-  height: 100vh;
+  height: 101vh;
   background-color: var(--bg);
   color: var(--fg);
+  font-family: 'Source Code Pro', monospace;
+  font-size: 2rem;
+  border-bottom: 1vh double black;
 }
 
 .footer {

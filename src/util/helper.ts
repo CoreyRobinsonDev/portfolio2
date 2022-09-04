@@ -19,10 +19,14 @@ export const clear = () => {
   localStorage.clear();
 }
 
-
+export type History = {
+  command: string,
+  output: string[],
+  path: string []
+}
 export class CLI {
     path: string[];
-    history: { command: string, output: string[] }[];
+    history: History[];
     currentDir: string;
 
   constructor() {
@@ -64,7 +68,7 @@ export class CLI {
       }
     }
 
-    let path: any = this.path;
+    let path: any = [...this.path];
     path = path.join("/");
     let isEqual = false;
 
@@ -75,7 +79,10 @@ export class CLI {
       }
     }
 
-    if (!isEqual) return `bash: cd: ${dir}: No such file or directory`;
+    if (!isEqual) {
+      this.path.pop();
+      return `bash: cd: ${dir}: No such file or directory`;
+    };
 
 
     this.updatePath();
@@ -84,7 +91,7 @@ export class CLI {
   }
 
   mkdir(dir: string) {
-    const path = this.path;
+    const path = [...this.path];
     path?.push(dir);
     create(path!.join("/"), "");
   }
@@ -132,7 +139,7 @@ export class CLI {
         output = [""];
         break;
       case "pwd":
-        output = get("path") ? [get("path")] : ["~"];
+        output = get("path") ? [get("path").join("/")] : ["~"];
         break;
       case "mkdir":
         this.mkdir(value1);
@@ -144,7 +151,7 @@ export class CLI {
     }
     
     if (command !== "clear" && command !== "localClear") {
-      this.history.push({ command: `${command} ${value1 ? value1 : ""} ${value2 ? value2 : ""}`, output });
+      this.history.push({ command: `${command} ${value1 ? value1 : ""} ${value2 ? value2 : ""}`, output, path: this.path });
       this.updateHistory();
     }
   }
