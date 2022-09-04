@@ -1,0 +1,66 @@
+.container {
+  display: grid;
+  grid-template-columns: 80vw 5vw;
+  place-items: center;
+  margin: 0 10vw;
+  color: var(--text-color);
+}
+
+.title_container {
+  transform: rotate(90deg);
+  letter-spacing: 1rem;
+  width: 5rem;
+}
+
+.title {
+  position: relative;
+  bottom: -1.3rem;
+  left: -5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--bg-color);
+  width: 100%;
+  margin-top: 2rem;
+  padding: 2rem;
+  box-shadow: -5px 5px 5px black;
+}
+
+.link {
+  font-size: 2rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.form__name, .form__email, .form__message {
+  border: 1px dotted var(--border-color);
+  border-radius: var(--border-radius);
+  color: var(--text-color);
+  font-size: 2rem;
+  width: 80%; 
+  padding: .5rem;
+  outline: none;
+}
+
+.form__name::placeholder, .form__email::placeholder, .form__message::placeholder {
+  color: var(--text-color);
+  opacity: .5;
+}
+
+.form__message {
+  height: 15rem;
+  resize: none;
+}
+
+.form__submit {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: none;
+  font-size: 2rem;
+  padding: .2rem .5rem 0 .5rem;
+  cursor: pointer;
+}
