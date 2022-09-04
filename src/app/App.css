@@ -12,6 +12,7 @@ html {
 body {
 	font-size: 1.6rem;
   font-family: 'Raleway', sans-serif;
+	background-color: var(--main-bg-color);
 }
 button {
 	background: none;
@@ -27,7 +28,9 @@ li {
   list-style-type: none;
 }
 :root {
-  --border-color: black;
-  --bg-color: white;
-  --text-color: #333;
+	--main-bg-color: white;
+  --border-color: #276D9B;
+  --bg-color: #D0EDF1;
+  --text-color: #276D9B;
+	--border-radius: 5px;
 }

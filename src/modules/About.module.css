@@ -3,13 +3,14 @@
   grid-template-columns: 80vw 5vw;
   place-items: center;
   margin: 0 10vw;
+  color: var(--text-color);
 }
 
 .about_section {
   box-shadow: -5px 5px 5px black;
   margin: 2rem 0;
   padding: 2rem;
-  color: var(--text-color);
+  background-color: var(--bg-color);
   font-size: 2rem;
 }
 
@@ -29,7 +30,7 @@
 .title {
   position: relative;
   bottom: -1.3rem;
-  background-color: white;
+  background-color: var(--main-bg-color);
 }
 
 .link_container {

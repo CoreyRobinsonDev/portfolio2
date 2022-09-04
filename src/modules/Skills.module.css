@@ -3,6 +3,7 @@
   grid-template-columns: 80vw 5vw;
   place-items: center;
   margin: 0 10vw;
+  color: var(--text-color);
 }
 
 .container div div {
@@ -11,6 +12,7 @@
   background-color: rgba(0, 0, 0, 0.02);
   height: fit-content;
   padding: 1rem;
+  border-radius: var(--border-radius);
 }
 
 
@@ -25,7 +27,7 @@
 .title {
   position: relative;
   bottom: -1.3rem;
-  background-color: white;
+  background-color: var(--main-bg-color);
 }
 
 .skills_container {
@@ -35,6 +37,7 @@
   padding: 2rem;
   box-shadow: -5px 5px 5px black;
   width: 100%;
+  background-color: var(--bg-color);
 }
 
 .skills_title {
@@ -59,13 +62,15 @@
 .tech_title {
   position: relative;
   bottom: 2rem;
-  background-color: rgba(250, 250, 250);
+  background-color: var(--bg-color);
   width: fit-content;
-  margin-bottom: -2rem;
+  height: 1rem;
+  margin-bottom: -.5rem;
 }
 
 .sub_tech {
   border: 1px dashed var(--border-color); 
+  border-radius: var(--border-radius);
   padding: 1rem;
 }
 

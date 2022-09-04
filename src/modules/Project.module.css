@@ -10,6 +10,7 @@
   box-shadow: -5px 5px 5px black;
   padding: 2rem;
   color: var(--text-color);
+  background-color: var(--bg-color);
   font-size: 2rem;
 }
 
@@ -18,6 +19,7 @@
   width: 100%;
   height: auto;
   border: 1px dashed var(--border-color);
+  border-radius: var(--border-radius);
 }
 
 .info_container, .tech_container {
@@ -25,6 +27,7 @@
   padding: 1rem;
   margin-top: 2rem;
   border: 1px dashed var(--border-color);
+  border-radius: var(--border-radius);
 }
 
 .title, .title--main {

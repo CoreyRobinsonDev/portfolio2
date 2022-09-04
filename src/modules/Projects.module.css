@@ -3,6 +3,7 @@
   grid-template-columns: 80vw 5vw;
   place-items: center;
   margin: 0 10vw;
+  color: var(--text-color);
 }
 
 .projects {
@@ -21,7 +22,7 @@
 .title {
   position: relative;
   bottom: -1.3rem;
-  background-color: white;
+  background-color: var(--main-bg-color);
 }
 
 @media only screen and (max-width: 1000px) {
