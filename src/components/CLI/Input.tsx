@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { CLI, get, History } from "../../util/helper";
+import { get, History } from "../../util/helper";
+import { CLI } from "../../util/CLI";
 import styles from "../../modules/CLI/Input.module.css";
 
 const Input = () => {

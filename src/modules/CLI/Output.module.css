@@ -1,5 +1,3 @@
-
-
 .line {
   display: flex;
   gap: 1rem;
@@ -7,4 +5,9 @@
 
 .line__path {
   color: var(--green);
+}
+
+.output__help {
+  display: grid;
+  grid-template-columns: .2fr 1fr;
 }
