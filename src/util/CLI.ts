@@ -1,4 +1,5 @@
 import { get, remove, clear, create, History } from "./helper";
+import { introAscii } from "./ascii";
 
 export class CLI {
   path: string[];
@@ -10,7 +11,7 @@ export class CLI {
     this.path = get("path") ? get("path") : create("path", ["~"]);
     this.history = get("history") ? get("history") : [];
     this.currentDir = create("currentDir", this.path[this.path.length - 1]);
-    this.directories = get("directories") ? get("directories") : ["~"];
+    this.directories = get("directories") ? get("directories") : ["~", "~/projects", "~/about.txt", "~/skills.txt"];
   }
 
   updatePath() {
@@ -84,7 +85,7 @@ export class CLI {
           dirArr.pop();
         }
         if (dirArr.length === 0) continue;
-        list.push(`/${dirArr[0]}`)
+        list.push(`${dirArr[0].includes(".") ? "" : "/"}${dirArr[0]}`)
       }
     }
     return list.length ? list : [""];
@@ -110,7 +111,7 @@ export class CLI {
           ["help", "- see list of commands"],
           ["cd <dir>", "- change to directory <dir>"],
           ["cd", "- change to home"],
-          ["ls", "- directory listing"],
+          ["ls", "- list directories"],
           ["pwd", "- print working directory"],
           ["mkdir <dir>", "- make directory <dir>"],
           ["rm <file>", "- remove <file>"],
@@ -119,11 +120,12 @@ export class CLI {
           ["cp <dir1> <dir2>", "- copy <dir1> to <dir2>"],
           ["mv <file1> <file2>", "- rename or move <file1> to <file2>. If <file2> is an existing directory, moves into directory <file2>"],
           ["touch <file>", "- create or update <file>"],
-          ["cat > <file>", "- places standard input into <file>"],
+          ["cat <file>", "- output <file> contents"],
           ["more <file>", "- output contents of <file>"],
           ["head <file>", "- output first 10 lines of <file>"],
           ["tail <file>", "- output last 10 lines of <file>"],
           ["date", "- show the current date and time"],
+          ["intro", "- output this site's intro panel"],
           ["clear", "- clear commands"],
           ["clearLocal", "- clear local history"]
         ]
@@ -149,12 +151,15 @@ export class CLI {
       case "date":
         output = [this.date()];
         break;
+      case "intro":
+        output = [introAscii];
+        break;
       default:
         output = [`bash: ${command}: command not found`];
     }
     
     if (command !== "clear" && command !== "clearLocal") {
-      this.history.push({ command: `${command} ${value1 ? value1 : ""} ${value2 ? value2 : ""}`, output, path: this.path });
+      this.history.push({ command: `${command} ${value1 ? value1 : ""} ${value2 ? value2 : ""}`.trim(), output, path: this.path });
       this.updateHistory();
     }
   }
