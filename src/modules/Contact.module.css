@@ -64,3 +64,14 @@
   padding: .2rem .5rem 0 .5rem;
   cursor: pointer;
 }
+
+@media only screen and (max-width: 1000px) {
+  .title_container {
+    display: none;
+  }
+
+  .container {
+    display: flex;
+    margin: 0;
+  }
+}
