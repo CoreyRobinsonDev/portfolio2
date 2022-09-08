@@ -24,3 +24,7 @@ export type History = {
   output: string[],
   path: string []
 }
+
+export type Directories = {
+  
+}

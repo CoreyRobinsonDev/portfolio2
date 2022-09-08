@@ -1,5 +1,5 @@
 import { get, History } from "../../util/helper";
-import { nameAscii, titleAscii, introAscii } from "../../util/ascii";
+import { nameAscii, titleAscii, introAscii } from "../../info/ascii";
 import styles from "../../modules/CLI/Output.module.css";
 
 const Output = () => {
@@ -21,7 +21,8 @@ const Output = () => {
         </span>
         {line?.command === "help" && line.output?.map((item, key2) => <span className={styles.output__help} key={key2}><p>{item[0]}</p><p>{item[1]}</p></span>)}
         {line?.command === "intro" && line.output?.map((item, key2) => <pre key={key2} className={styles.ascii__intro}><code>{item}</code></pre>)}
-        {(line?.command !== "help" && line?.command !== "intro") && line.output?.map((item, key2) => <p className={styles.output} key={key2}>{item}</p>)}
+        {line?.command === "cat skills.txt" && line.output?.map((item, key2) => <span className={styles.output__cat} key={key2}><p>{item?.[0]}</p><p>{item?.[1]}</p><p>{item?.[2]}</p></span>)}
+        {(line?.command !== "help" && line?.command !== "intro" && line?.command !== "cat skills.txt") && line.output?.map((item, key2) => <p className={styles.output} key={key2}>{item}</p>)}
         {line.output[0] === "" ? "" : <br/>}
       </span>)
     }

@@ -1,5 +1,6 @@
 import { get, remove, clear, create, History } from "./helper";
-import { introAscii } from "./ascii";
+import { introAscii } from "../info/ascii";
+import { about, skills } from "../info/text";
 
 export class CLI {
   path: string[];
@@ -11,7 +12,7 @@ export class CLI {
     this.path = get("path") ? get("path") : create("path", ["~"]);
     this.history = get("history") ? get("history") : [];
     this.currentDir = create("currentDir", this.path[this.path.length - 1]);
-    this.directories = get("directories") ? get("directories") : ["~", "~/projects", "~/about.txt", "~/skills.txt"];
+    this.directories = get("directories") ? get("directories") : ["~", "~/projects", "~/about.txt", "~/skills.txt", "~/projects/stonks", ""];
   }
 
   updatePath() {
@@ -94,9 +95,16 @@ export class CLI {
   date() {
     return new Date().toString();
   }
+
+  cat(file: string) {
+    if (file === "about.txt") return [about];
+    if (file === "skills.txt") return skills;
+
+    return [`cat: ${file}: No such file or directory`];
+  }
   
   parseCommand(commandString: string) {
-    const [command, value1, value2] = commandString.split(" ");
+    const [command, value1, value2, ...value3] = commandString.split(" ");
     let output: any[];
     
     switch (command) {
@@ -114,6 +122,7 @@ export class CLI {
           ["ls", "- list directories"],
           ["pwd", "- print working directory"],
           ["mkdir <dir>", "- make directory <dir>"],
+          ["echo <message>", "- returns whatever is passed into it"],
           ["rm <file>", "- remove <file>"],
           ["rm <dir>", "- remove directory <dir>"],
           ["cp <file1> <file2>", "- copy <file1> to <file2>"],
@@ -121,7 +130,6 @@ export class CLI {
           ["mv <file1> <file2>", "- rename or move <file1> to <file2>. If <file2> is an existing directory, moves into directory <file2>"],
           ["touch <file>", "- create or update <file>"],
           ["cat <file>", "- output <file> contents"],
-          ["more <file>", "- output contents of <file>"],
           ["head <file>", "- output first 10 lines of <file>"],
           ["tail <file>", "- output last 10 lines of <file>"],
           ["date", "- show the current date and time"],
@@ -154,12 +162,18 @@ export class CLI {
       case "intro":
         output = [introAscii];
         break;
+      case "cat":
+        output = this.cat(value1);
+        break;
+      case "echo":
+        output = [`${value1} ${value2 ? value2 : ""} ${value3?.join(" ")}`];
+        break;
       default:
         output = [`bash: ${command}: command not found`];
     }
     
     if (command !== "clear" && command !== "clearLocal") {
-      this.history.push({ command: `${command} ${value1 ? value1 : ""} ${value2 ? value2 : ""}`.trim(), output, path: this.path });
+      this.history.push({ command: `${command} ${value1 ? value1 : ""} ${value2 ? value2 : ""} ${value3 ? value3.join(" ") : ""}`.trim(), output, path: this.path });
       this.updateHistory();
     }
   }

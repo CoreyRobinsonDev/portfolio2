@@ -23,7 +23,8 @@
 
 .scroll {
   text-align: center;
-  font-weight: bold;font-size: 3rem;
+  font-weight: bold;
+  font-size: 3rem;
   color: var(--comment);
   opacity: 50%;
   margin-top: 40rem;
@@ -42,4 +43,13 @@
 .output__help {
   display: grid;
   grid-template-columns: .2fr 1fr;
+}
+
+.output__cat {
+  display: grid;
+  grid-template-columns: .1fr .1fr .2fr;
+}
+
+.output {
+  max-width: 60ch;
 }
