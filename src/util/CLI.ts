@@ -177,6 +177,9 @@ export class CLI {
       case "echo":
         output = [`${value1} ${value2 ? value2 : ""} ${value3?.join(" ")}`];
         break;
+      case "contact":
+        output = [[value1, value2, value3?.join(" ")]]
+        break;
       default:
         output = [`${command}: command not found`];
     }
