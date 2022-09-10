@@ -2,7 +2,7 @@
 export const create = (key: string, value: any) => {
   localStorage.setItem(key, JSON.stringify(value));
 
-  return localStorage[key];
+  return value;
 }
 
 export const get = (key: string) => {

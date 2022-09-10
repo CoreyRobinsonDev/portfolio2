@@ -6,13 +6,23 @@ export class CLI {
   path: string[];
   history: History[];
   currentDir: string;
-  directories: string[]
+  directories: any;
 
   constructor() {
     this.path = get("path") ? get("path") : create("path", ["~"]);
     this.history = get("history") ? get("history") : [];
     this.currentDir = create("currentDir", this.path[this.path.length - 1]);
-    this.directories = get("directories") ? get("directories") : ["~", "~/projects", "~/about.txt", "~/skills.txt", "~/projects/stonks", ""];
+    this.directories = get("directories") ? get("directories") : {
+      "~": {
+        "projects": {
+          "stonks": "",
+          "chess-openings": "",
+          "mars-gallery": ""
+        },
+        "about.txt": about,
+        "skills.txt": skills
+      }
+    }
   }
 
   updatePath() {
@@ -48,20 +58,16 @@ export class CLI {
       }
     }
 
-    let path: any = [...this.path];
-    path = path.join("/");
-    let isEqual = false;
+    let obj = this.directories[this.path[0]];
 
-    for (const key of this.directories) {
-      if (path === key) {
-        isEqual = true;
-        break;
-      }
+    for (let i = 1; i < this.path.length; i++) {
+      obj = obj[this.path[i]];
     }
+    
 
-    if (!isEqual) {
+    if (typeof obj === "undefined") {
       this.path.pop();
-      return `bash: cd: ${dir}: No such file or directory`;
+      return `cd: ${dir}: No such file or directory`;
     };
     this.updatePath();
     this.updateCurrentDir();
@@ -69,27 +75,31 @@ export class CLI {
   }
 
   mkdir(dir: string) {
-    const path = [...this.path];
-    path?.push(dir);
-    this.directories.push(path.join("/"));
+    if (!dir) return "mkdir: missing operand";
+    let obj = this.directories[this.path[0]];
+
+    for (let i = 1; i < this.path.length; i++) {
+      obj = obj[this.path[i]];
+    }
+
+    obj[dir] = {};
     this.updateDirectories();
+    return "";
   }
 
   ls() {
-    const path = this.path.join("/");
-    const list = [];
+    let obj = this.directories[this.path[0]];
+    const list: string[] = [];
 
-    for (const dir of this.directories) {
-      if (dir.includes(path)) {
-        const dirArr = dir.split("/").reverse();
-        for (let i = 0; i < this.path.length; i++) {
-          dirArr.pop();
-        }
-        if (dirArr.length === 0) continue;
-        list.push(`${dirArr[0].includes(".") ? "" : "/"}${dirArr[0]}`)
-      }
+    for (let i = 1; i < this.path.length; i++) {
+      obj = obj[this.path[i]];
     }
-    return list.length ? list : [""];
+    
+    for (const dir of Object.keys(obj)) {
+      list.push(dir.includes(".") ? dir : "/" + dir);
+    }
+
+    return list.length ? list.sort() : [""];
   }
 
   date() {
@@ -150,8 +160,7 @@ export class CLI {
         output = get("path") ? [get("path").join("/")] : ["~"];
         break;
       case "mkdir":
-        this.mkdir(value1);
-        output = [""];
+        output = [this.mkdir(value1)];
         break;
       case "ls":
         output = this.ls();
@@ -169,7 +178,7 @@ export class CLI {
         output = [`${value1} ${value2 ? value2 : ""} ${value3?.join(" ")}`];
         break;
       default:
-        output = [`bash: ${command}: command not found`];
+        output = [`${command}: command not found`];
     }
     
     if (command !== "clear" && command !== "clearLocal") {
