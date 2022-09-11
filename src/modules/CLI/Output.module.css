@@ -40,6 +40,11 @@
   color: var(--yellow);
 }
 
+.output, .output__cat, .output__help {
+  overflow: hidden;
+  height: fit-content;
+}
+
 .output__help {
   display: grid;
   grid-template-columns: .2fr 1fr;
@@ -65,6 +70,9 @@
   border: none;
   font-size: 2rem;
   outline: none;
+  font-family: 'Source Code Pro', monospace;
+  width: fit-content;
+  resize: none;
 }
 
 .form__submit {
@@ -75,5 +83,4 @@
 
 .form__submit:hover {
   color: var(--comment);
-  cursor: pointer;
 }
