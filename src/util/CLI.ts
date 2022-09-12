@@ -174,14 +174,14 @@ export class CLI {
 
   predictCommand(commandStr: string | undefined) {
     if (!commandStr) return "";
-    const commands = ["cd", "ls", "pwd", "help", "mkdir", "echo", "rm", "cp", "mv", "cat", "touch", "date", "intro", "clear", "clearLocal"].sort();
+    const commands = ["cat", "cd", "clear", "clearLocal", "contact", "cp", "date", "echo", "goto", "help", "intro", "ls", "mkdir", "mv", "pwd", "rm", "touch"];
 
     return commands.find(command => {
-      let isMatch = false;
+      const isMatchArr: boolean[] = [];
       for (let i = 0; i < commandStr.length; i++) {
-        isMatch = command[i] === commandStr[i];
+        isMatchArr.push(command[i] === commandStr[i]);
       }
-      return isMatch;
+      return !isMatchArr.includes(false);
     })?.slice(commandStr?.length);
   }
 

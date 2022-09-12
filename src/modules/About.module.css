@@ -29,6 +29,7 @@
 .title {
   position: relative;
   bottom: -1.3rem;
+  color: var(--bg-color);
 }
 
 .link_container {
@@ -37,7 +38,7 @@
 }
 
 .link_container a {
-  color: var(--text-color);
+  color: var(--link-color);
 }
 
 @media only screen and (max-width: 1000px) {

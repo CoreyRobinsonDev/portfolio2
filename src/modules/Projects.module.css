@@ -17,12 +17,14 @@
   border-bottom: 1px solid;
   letter-spacing: 1rem;
   width: 85rem;
+  color: var(--bg-color);
 }
 
 .title {
   position: relative;
   bottom: -1.3rem;
   left: -17rem;
+  color: var(--bg-color);
 }
 
 @media only screen and (max-width: 1000px) {

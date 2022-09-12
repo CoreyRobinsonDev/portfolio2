@@ -30,9 +30,10 @@ li {
 }
 :root {
 	--main-bg-color: white;
-  --border-color: #276D9B;
-  --bg-color: #D0EDF1;
-  --text-color: #276D9B;
+  --border-color: #e45649;
+  --bg-color: #383a42;
+  --text-color: white;
+	--link-color: #0184bc;
 	--border-radius: 5px;
 }
 
@@ -48,5 +49,5 @@ body::-webkit-scrollbar-thumb {
 
 main {
 	background-image: url("/public/pics/binaryImage.webp");
-	padding-bottom: 4rem;
+	padding: 4rem 0;
 }

@@ -1,16 +1,30 @@
 .container {
   text-align: center;
+  background-color: var(--bg-color);
+  margin: 2rem 9.2vw 0 10vw;
+  padding: 2rem;
+  box-shadow: -5px 5px 5px black;
 }
 
 .name {
   font-weight: 300;
   font-size: 8rem;
+  color: var(--text-color);
+  overflow: hidden;
 }
 
 .lastName {
+  overflow: hidden;
   font-weight: 800 ;
 }
 
 .title {
-  color: #7CB7DE;
+  overflow: hidden;
+  color: var(--border-color);
+}
+
+@media only screen and (max-width: 1000px) {
+  .container {
+    margin: 0;
+  }
 }

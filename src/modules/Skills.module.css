@@ -22,12 +22,14 @@
   border-bottom: 1px solid;
   letter-spacing: 1rem;
   width: 30rem;
+  color: var(--bg-color);
 }
 
 .title {
   position: relative;
   bottom: -1.3rem;
   left: -12rem;
+  color: var(--bg-color);
 }
 
 .skills_container {
