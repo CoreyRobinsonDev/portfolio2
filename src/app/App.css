@@ -36,6 +36,16 @@ li {
 	--border-radius: 5px;
 }
 
+body::-webkit-scrollbar {
+  width: 1.4rem;               /* width of the entire scrollbar */
+}
+body::-webkit-scrollbar-track {
+  background: var(--main-bg-color);        /* color of the tracking area */
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #383a42;    /* color of the scroll thumb */
+}
+
 main {
 	background-image: url("/public/pics/binaryImage.webp");
 	padding-bottom: 4rem;

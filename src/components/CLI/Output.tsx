@@ -25,7 +25,7 @@ const Output = () => {
         {line?.command === "help" && line.output?.map((item, key2) => <span className={styles.output__help} key={key2}><p>{item[0]}</p><p>{item[1]}</p></span>)}
         {line?.command === "intro" && line.output?.map((item, key2) => <pre key={key2} className={styles.ascii__intro}><code>{item}</code></pre>)}
         {line?.command === "cat" && line.output?.map((item, key2) => <span className={styles.output__cat} key={key2}><p>{item?.[0]}</p><p>{item?.[1]}</p><p>{item?.[2]}</p></span>)}
-        {line?.command === "goto" && line.output?.map((item, key2) => <><a className={styles.output__link} key={key2} href={`https://${item}-crd.netlify.app`} target="_blank" rel="noreferrer">{item}</a><br/></>)}
+        {line?.command === "goto" && line.output?.map((item, key2) => <a className={styles.output__link} key={key2} href={`https://${item}-crd.netlify.app`} target="_blank" rel="noreferrer">{item}</a>)}
         {line?.command === "contact" && line.output?.map((item, key2) => <form key={key2} className={styles.form} name="contact" method="POST" data-netlify="true">
           <input type="hidden" name="form-name" value="contact" />
           <input className={styles.form__name} type="text" name="name" placeholder="Name" value={item[0]} required />
