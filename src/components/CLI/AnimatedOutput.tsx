@@ -8,9 +8,9 @@ const AnimatedOutput = () => {
 
   const container = {
     hidden: { opacity: 0 },
-    visible: (i = 1) => ({
+    visible: () => ({
       opacity: 1,
-      transition: {staggerChildren: 0.12, delayChildren: 0.01 * i}
+      transition: {staggerChildren: 0.05}
     })
   }
 
@@ -36,7 +36,8 @@ const AnimatedOutput = () => {
   }
 
   return <>
-    <span className={styles.line}>
+    {line && <>
+      <span className={styles.line}>
       <p className={styles.line__path}>{line?.path.join("/")}</p>
       <p className={styles.line__command}>$ {line?.command}</p>
     </span>
@@ -58,7 +59,7 @@ const AnimatedOutput = () => {
     </motion.form>)}
     {(line?.command !== "help" && line?.command !== "intro" && line?.command !== "cat skills.txt" && !line?.command.includes("contact")) && line?.output?.map((item, key2) => <motion.p variants={container} initial="hidden" animate="visible"className={styles.output} key={key2}>{item?.split("").map(ch => <motion.span variants={child}>{ch}</motion.span>)}</motion.p>)}
     {line?.output[0] === "" ? "" : <br/>}
-    
+    </>}
   </>
 }
 export default AnimatedOutput;
