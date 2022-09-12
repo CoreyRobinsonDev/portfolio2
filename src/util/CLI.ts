@@ -172,8 +172,21 @@ export class CLI {
     return `${value1 ? value1 : ""} ${value2 ? value2 : ""} ${value3?.join(" ")}`
   }
 
-  parseCommand(commandString: string) {
-    const [command, value1, value2, ...value3] = commandString.split(" ");
+  predictCommand(commandStr: string | undefined) {
+    if (!commandStr) return "";
+    const commands = ["cd", "ls", "pwd", "help", "mkdir", "echo", "rm", "cp", "mv", "cat", "touch", "date", "intro", "clear", "clearLocal"].sort();
+
+    return commands.find(command => {
+      let isMatch = false;
+      for (let i = 0; i < commandStr.length; i++) {
+        isMatch = command[i] === commandStr[i];
+      }
+      return isMatch;
+    })?.slice(commandStr?.length);
+  }
+
+  parseCommand(commandStr: string) {
+    const [command, value1, value2, ...value3] = commandStr.split(" ");
     let output: any[];
     
     switch (command) {
@@ -199,8 +212,6 @@ export class CLI {
           ["mv <file1> <file2>", "- rename or move <file1> to <file2>"],
           ["touch <file>", "- create or update <file>"],
           ["cat <file>", "- output <file> contents"],
-          ["head <file>", "- output first 10 lines of <file>"],
-          ["tail <file>", "- output last 10 lines of <file>"],
           ["date", "- show the current date and time"],
           ["intro", "- output this site's intro panel"],
           ["clear", "- clear commands"],

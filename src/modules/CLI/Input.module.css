@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   display: flex;
   gap: 1rem;
 }
@@ -15,4 +16,11 @@
   font-family: 'Source Code Pro', monospace;
   font-size: 2rem;
   width: 80vw;
+}
+
+.placeholder {
+  position: absolute;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 2rem;
+  color: var(--comment);
 }

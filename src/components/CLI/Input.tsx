@@ -9,7 +9,7 @@ const Input = () => {
   const cli = new CLI();
   const [value, setValue] = useState("");
   const [historyIndex, setHistoryIndex] = useState(-1);
-
+  const [placeholder, setPlaceholder] = useState("");
   
   const cycleHistory = (e: any) => {
     if (e.key === "ArrowUp") {
@@ -23,14 +23,28 @@ const Input = () => {
     }
   }
 
+  const autocomplete = () => {
+    setValue(value + placeholder);
+    setPlaceholder("");
+  }
+
   const handleKeyUp = (e: any) => {
-    cycleHistory(e);
+    const key = e.key;
+    if (key === "ArrowDown" || key === "ArrowUp") cycleHistory(e);
+    if (key === "ArrowRight") autocomplete();
+  }
+
+  const handleChange = (e: any) => {
+    const str = e.target.value;
+    setValue(str);
+    setPlaceholder(cli.predictCommand(str)!)
   }
 
   return <form className={styles.container} onSubmit={() => cli.parseCommand(value)}>
     <p className={styles.path}>{path}</p>
     <p>$</p>
-    <input className={styles.input} type="text" value={value} onChange={(e) => setValue(e.target.value)} onKeyUp={(e) => handleKeyUp(e)} autoFocus />
+    <p className={styles.placeholder} style={{left: `${value?.length + 3}.6ch`}}>{placeholder}</p>
+    <input className={styles.input} type="text" value={value} onChange={(e) => handleChange(e)} onKeyUp={(e) => handleKeyUp(e)} autoFocus />
     </form>
 }
 export default Input;
