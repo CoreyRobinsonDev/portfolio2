@@ -242,12 +242,15 @@ export class CLI {
       case "touch":
         output = [this.touch(value1)];
         break;
+      case "goto":
+        output = [value1];
+        break;
       default:
         output = [`${command}: command not found`];
     }
     
     if (command !== "clear" && command !== "clearLocal") {
-      this.history.push({ command: `${command} ${value1 ? value1 : ""} ${value2 ? value2 : ""} ${value3 ? value3.join(" ") : ""}`.trim(), output, path: this.path });
+      this.history.push({ command, commandStr: `${command} ${value1 ? value1 : ""} ${value2 ? value2 : ""} ${value3 ? value3.join(" ") : ""}`.trim(), output, path: this.path });
       this.updateHistory();
     }
   }

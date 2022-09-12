@@ -32,7 +32,7 @@ export const projects = [
     title: "Mars Gallery",
     img: "pics/mars-gallery-pic.webp",
     gif: "gifs/mars-gallery-gif.gif",
-    site: "https://mars-gallery.netlify.app/",
+    site: "https://mars-gallery-crd.netlify.app/",
     code: "https://github.com/CoreyRobinsonDev/mars-gallery",
     description: "A simple web app for searching photos taken on Mars using NASA's Mars Rover Photos api.",
     tech: {

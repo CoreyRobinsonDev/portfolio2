@@ -21,6 +21,7 @@ export const clear = () => {
 
 export type History = {
   command: string,
+  commandStr: string,
   output: string[],
   path: string []
 }

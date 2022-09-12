@@ -40,9 +40,10 @@
   color: var(--yellow);
 }
 
-.output, .output__cat, .output__help {
-  overflow: hidden;
-  height: fit-content;
+.output__link {
+  color: var(--blue);
+  text-decoration: underline;
+  margin-bottom: 1rem;
 }
 
 .output__help {

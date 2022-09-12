@@ -23,12 +23,13 @@ export const titleAscii = `
 
 
 export const introAscii = `
-+---------------------------------------------------------------------+  +-----------------+  +----------------+
-+                                commands                             +  +        ~        +  +    projects    +
-+--------------------------------------------+------------------------+  +-----------------+  +----------------+
-| cat <file>                                 | output file contents   |  | /projects       |  | stonks         |
-| cd projects                                | change to projects dir |  | about.txt       |  | chess-openings |
-| contact <your name> <your email> <message> | contacts me via email  |  | skills.txt      |  | mars-gallery   |
-| help                                       | see list of commands   |  +-----------------+  +----------------+
-+--------------------------------------------+------------------------+                                         
++--------------------------------------------------------------------------+  +-----------------+  +----------------+
++                                   commands                               +  +        ~        +  +    projects    +
++--------------------------------------------+-----------------------------+  +-----------------+  +----------------+
+| cat <file>                                 | output file contents        |  | /projects       |  | stonks         |
+| cd projects                                | change to projects dir      |  | about.txt       |  | chess-openings |
+| contact <your name> <your email> <message> | contacts me via email       |  | skills.txt      |  | mars-gallery   |
+| goto <project>                             | creates a link to <project> |  +-----------------+  +----------------+
+| help                                       | see list of commands        |  
++--------------------------------------------+-----------------------------+                                         
 `;

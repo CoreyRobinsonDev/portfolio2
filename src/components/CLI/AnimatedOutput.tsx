@@ -5,6 +5,7 @@ import styles from "../../modules/CLI/Output.module.css";
 const AnimatedOutput = () => {
   const historyArr: History[] = get("history");
   const line: History | undefined = historyArr?.pop();
+  const specialCommands = ["help", "intro", "cat", "goto", "contact"];
 
   const container = {
     hidden: { opacity: 0 },
@@ -39,13 +40,14 @@ const AnimatedOutput = () => {
     {line && <>
       <span className={styles.line}>
       <p className={styles.line__path}>{line?.path.join("/")}</p>
-      <p className={styles.line__command}>$ {line?.command}</p>
+      <p className={styles.line__command}>$ {line?.commandStr}</p>
     </span>
     {line?.command === "help" && line?.output?.map((item, key2) => <span className={styles.output__help} key={key2}>
       <motion.p variants={container} initial="hidden" animate="visible">{item[0].split("").map(ch => <motion.span variants={child}>{ch}</motion.span>)}</motion.p>
       <motion.p variants={container} initial="hidden" animate="visible">{item[1].split("").map(ch => <motion.span variants={child}>{ch}</motion.span>)}</motion.p></span>)}
     {line?.command === "intro" && line?.output?.map((item, key2) => <pre key={key2} className={styles.ascii__intro}><code>{item}</code></pre>)}
-    {line?.command === "cat skills.txt" && line.output?.map((item, key2) => <span className={styles.output__cat} key={key2}>
+      {line?.command === "goto" && line.output?.map((item, key2) => <motion.a className={styles.output__link} variants={container} initial="hidden" animate="visible" key={key2} href={`https://${item}-crd.netlify.app`} target="_blank" rel="noreferrer">{item.split("").map(ch => <motion.span variants={child}>{ch}</motion.span>)}</motion.a>)}
+    {line?.command === "cat" && line.output?.map((item, key2) => <span className={styles.output__cat} key={key2}>
       <motion.p variants={container} initial="hidden" animate="visible">{item?.[0]?.split("").map(ch => <motion.span variants={child}>{ch}</motion.span>)}</motion.p>
       <motion.p variants={container} initial="hidden" animate="visible">{item?.[1]?.split("").map(ch => <motion.span variants={child}>{ch}</motion.span>)}</motion.p>
       <motion.p variants={container} initial="hidden" animate="visible">{item?.[2]?.split("").map(ch => <motion.span variants={child}>{ch}</motion.span>)}</motion.p>
@@ -57,7 +59,7 @@ const AnimatedOutput = () => {
       <motion.textarea variants={child} className={styles.form__message} name="message" placeholder="Message..." value={item[2]} required />
       <motion.input variants={child} className={`${styles.form__submit}`} type="submit" value="Send" />
     </motion.form>)}
-    {(line?.command !== "help" && line?.command !== "intro" && line?.command !== "cat skills.txt" && !line?.command.includes("contact")) && line?.output?.map((item, key2) => <motion.p variants={container} initial="hidden" animate="visible"className={styles.output} key={key2}>{item?.split("").map(ch => <motion.span variants={child}>{ch}</motion.span>)}</motion.p>)}
+    {!specialCommands.includes(line?.command) && line?.output?.map((item, key2) => <motion.p variants={container} initial="hidden" animate="visible"className={styles.output} key={key2}>{item?.split("").map(ch => <motion.span variants={child}>{ch}</motion.span>)}</motion.p>)}
     {line?.output[0] === "" ? "" : <br/>}
     </>}
   </>
