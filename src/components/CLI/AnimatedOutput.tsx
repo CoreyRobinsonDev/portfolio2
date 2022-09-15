@@ -5,7 +5,7 @@ import styles from "../../modules/CLI/Output.module.css";
 const AnimatedOutput = () => {
   const historyArr: History[] = get("history");
   const line: History | undefined = historyArr?.pop();
-  const specialCommands = ["help", "intro", "cat", "goto", "contact"];
+  const specialCommands = ["help", "info", "cat skills.txt", "goto", "contact"];
 
   const container = {
     hidden: { opacity: 0 },
@@ -45,9 +45,9 @@ const AnimatedOutput = () => {
     {line?.command === "help" && line?.output?.map((item, key2) => <span className={styles.output__help} key={key2}>
       <motion.p variants={container} initial="hidden" animate="visible">{item[0].split("").map(ch => <motion.span variants={child}>{ch}</motion.span>)}</motion.p>
       <motion.p variants={container} initial="hidden" animate="visible">{item[1].split("").map(ch => <motion.span variants={child}>{ch}</motion.span>)}</motion.p></span>)}
-    {line?.command === "intro" && line?.output?.map((item, key2) => <pre key={key2} className={styles.ascii__intro}><code>{item}</code></pre>)}
+    {line?.command === "info" && line?.output?.map((item, key2) => <pre key={key2} className={styles.ascii__intro}><code>{item}</code></pre>)}
       {line?.command === "goto" && line.output?.map((item, key2) => <motion.a className={styles.output__link} variants={container} initial="hidden" animate="visible" key={key2} href={`https://${item}-crd.netlify.app`} target="_blank" rel="noreferrer">{item.split("").map(ch => <motion.span variants={child}>{ch}</motion.span>)}</motion.a>)}
-    {line?.command === "cat" && line.output?.map((item, key2) => <span className={styles.output__cat} key={key2}>
+    {line?.commandStr === "cat skills.txt" && line.output?.map((item, key2) => <span className={styles.output__cat} key={key2}>
       <motion.p variants={container} initial="hidden" animate="visible">{item?.[0]?.split("").map(ch => <motion.span variants={child}>{ch}</motion.span>)}</motion.p>
       <motion.p variants={container} initial="hidden" animate="visible">{item?.[1]?.split("").map(ch => <motion.span variants={child}>{ch}</motion.span>)}</motion.p>
       <motion.p variants={container} initial="hidden" animate="visible">{item?.[2]?.split("").map(ch => <motion.span variants={child}>{ch}</motion.span>)}</motion.p>

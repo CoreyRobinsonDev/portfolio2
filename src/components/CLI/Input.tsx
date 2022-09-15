@@ -14,12 +14,12 @@ const Input = () => {
   const cycleHistory = (e: any) => {
     if (e.key === "ArrowUp") {
       if (historyIndex < history?.length - 1) setHistoryIndex(historyIndex + 1);
-      setValue(history[historyIndex]?.command)
+      setValue(history[historyIndex]?.commandStr)
     }
     
     if (e.key === "ArrowDown") {
       if (historyIndex > 0) setHistoryIndex(historyIndex - 1);
-      setValue(history[historyIndex]?.command)
+      setValue(history[historyIndex]?.commandStr)
     }
   }
 

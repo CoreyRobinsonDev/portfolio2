@@ -172,9 +172,57 @@ export class CLI {
     return `${value1 ? value1 : ""} ${value2 ? value2 : ""} ${value3?.join(" ")}`
   }
 
+  rm(fileOrDir: string) {
+    if(!fileOrDir) return "rm: missing operand"
+    let currentDir = this.directories[this.path[0]];
+
+    for (let i = 1; i < this.path.length; i++) {
+      currentDir = currentDir[this.path[i]];
+    }
+
+    if (!currentDir[fileOrDir]) return `rm: cannot remove '${fileOrDir}': No such file or directory`;
+    delete currentDir[fileOrDir];
+    this.updateDirectories();
+
+    return "";
+  }
+
+  cp(fileOrDir1: string, fileOrDir2: string) {
+    if (!fileOrDir1) return "cp: missing file operand";
+    if (!fileOrDir2) return `cp: missing destination file operand after '${fileOrDir1}'`;
+    const dirArr1 = fileOrDir1.split("/");
+    const dirArr2 = fileOrDir2.split("/");
+
+    let firstDir = this.directories[this.path[0]];
+    let secondDir = this.directories[this.path[0]];
+    
+    for (let i = 0; i < dirArr1.length; i++) {
+      firstDir = firstDir[dirArr1[i]];
+    }
+    for (let i = 0; i < dirArr2.length; i++) {
+      secondDir = secondDir[dirArr2[i]];
+    }
+    
+    if (!firstDir && firstDir !== "") return `cp: cannot stat '${fileOrDir1}': No such file or directory`;
+    if (!secondDir && secondDir !== "") return `cp: cannot stat '${fileOrDir2}': No such file or directory`;
+    if (!dirArr1[dirArr1.length - 1].includes(".") && dirArr2[dirArr2.length - 1].includes(".")) return `cp: ${fileOrDir1}: Is a directory`;
+    
+    if (dirArr1[dirArr1.length - 1].includes(".") && !dirArr2[dirArr2.length - 1].includes(".")) secondDir[dirArr1[dirArr1.length - 1]] = firstDir;
+    if (!dirArr1[dirArr1.length - 1].includes(".") && !dirArr2[dirArr2.length - 1].includes(".")) {
+      let newDir = this.directories[this.path[0]];
+      for (let i = 0; i < dirArr2.length - 1; i++) {
+        newDir = newDir[dirArr2[i]];
+      }
+      newDir[dirArr2[dirArr2.length-1]] = firstDir;
+    }
+
+    this.updateDirectories();
+    return "";
+  }
+
   predictCommand(commandStr: string | undefined) {
     if (!commandStr) return "";
-    const commands = ["cat", "cd", "clear", "clearLocal", "contact", "cp", "date", "echo", "goto", "help", "intro", "ls", "mkdir", "mv", "pwd", "rm", "touch"];
+    const commands = ["cat", "cd", "clear", "clearLocal", "contact", "cp", "date", "echo", "goto", "help", "info", "ls", "mkdir", "mv", "pwd", "rm", "touch"];
 
     return commands.find(command => {
       const isMatchArr: boolean[] = [];
@@ -182,7 +230,7 @@ export class CLI {
         isMatchArr.push(command[i] === commandStr[i]);
       }
       return !isMatchArr.includes(false);
-    })?.slice(commandStr?.length);
+    })?.slice(commandStr?.length) ?? "";
   }
 
   parseCommand(commandStr: string) {
@@ -213,7 +261,7 @@ export class CLI {
           ["touch <file>", "- create or update <file>"],
           ["cat <file>", "- output <file> contents"],
           ["date", "- show the current date and time"],
-          ["intro", "- output this site's intro panel"],
+          ["info", "- output this site's intro panel"],
           ["clear", "- clear commands"],
           ["clearLocal", "- clear local history"]
         ]
@@ -238,7 +286,7 @@ export class CLI {
       case "date":
         output = [this.date()];
         break;
-      case "intro":
+      case "info":
         output = [introAscii];
         break;
       case "cat":
@@ -255,6 +303,12 @@ export class CLI {
         break;
       case "goto":
         output = [value1];
+        break;
+      case "rm":
+        output = [this.rm(value1)];
+        break;
+      case "cp":
+        output = [this.cp(value1, value2)]
         break;
       default:
         output = [`${command}: command not found`];
