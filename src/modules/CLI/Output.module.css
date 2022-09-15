@@ -22,13 +22,18 @@
   color: var(--red);
 }
 
-.scroll {
+.scroll, .arrows {
   text-align: center;
   font-weight: bold;
   font-size: 3rem;
   color: var(--comment);
   opacity: 50%;
-  margin-top: 40rem;
+  margin-top: 30rem;
+}
+
+.arrows {
+  margin: 0;
+  font-size: 2rem;
 }
 
 

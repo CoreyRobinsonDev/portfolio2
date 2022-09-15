@@ -14,6 +14,8 @@ const Output = () => {
       <pre className={styles.ascii__title}><code>{titleAscii}</code></pre>
       <pre className={styles.ascii__intro}><code>{introAscii}</code></pre>
     </div>
+    <p className={styles.arrows}>{"->"} right arrow to autocomplete commands</p>
+    <p className={styles.arrows}>{"^v"} up and down arrows to cycle previous commands</p>
     <p className={styles.scroll}>Scroll Down to view Site</p>
     <div>
     {

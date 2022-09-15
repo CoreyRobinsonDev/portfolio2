@@ -208,7 +208,7 @@ export class CLI {
     if (!dirArr1[dirArr1.length - 1].includes(".") && dirArr2[dirArr2.length - 1].includes(".")) return `cp: ${fileOrDir1}: Is a directory`;
     
     if (dirArr1[dirArr1.length - 1].includes(".") && !dirArr2[dirArr2.length - 1].includes(".")) secondDir[dirArr1[dirArr1.length - 1]] = firstDir;
-    if (!dirArr1[dirArr1.length - 1].includes(".") && !dirArr2[dirArr2.length - 1].includes(".")) {
+    if ((!dirArr1[dirArr1.length - 1].includes(".") && !dirArr2[dirArr2.length - 1].includes(".")) || (dirArr1[dirArr1.length - 1].includes(".") && dirArr2[dirArr2.length - 1].includes("."))) {
       let newDir = this.directories[this.path[0]];
       for (let i = 0; i < dirArr2.length - 1; i++) {
         newDir = newDir[dirArr2[i]];
@@ -217,6 +217,32 @@ export class CLI {
     }
 
     this.updateDirectories();
+    return "";
+  }
+
+  mv(fileOrDir1: string, fileOrDir2: string) {
+    if (!fileOrDir1) return "mv: missing file operand";
+    if (!fileOrDir2) return `mv: missing destination file operand after '${fileOrDir1}'`;
+    const dirArr1 = fileOrDir1.split("/");
+    const dirArr2 = fileOrDir2.split("/");
+
+    let firstDir = this.directories[this.path[0]];
+    let secondDir = this.directories[this.path[0]];
+    
+    for (let i = 0; i < dirArr1.length; i++) {
+      firstDir = firstDir[dirArr1[i]];
+    }
+    for (let i = 0; i < dirArr2.length; i++) {
+      secondDir = secondDir[dirArr2[i]];
+    }
+    
+    if (!firstDir && firstDir !== "") this.touch(fileOrDir1);
+    if (!secondDir && secondDir !== "") this.touch(fileOrDir2);
+
+    this.cp(fileOrDir1, fileOrDir2);
+    this.rm(fileOrDir1);
+    this.updateDirectories();
+    
     return "";
   }
 
@@ -308,7 +334,10 @@ export class CLI {
         output = [this.rm(value1)];
         break;
       case "cp":
-        output = [this.cp(value1, value2)]
+        output = [this.cp(value1, value2)];
+        break;
+      case "mv":
+        output = [this.mv(value1, value2)];
         break;
       default:
         output = [`${command}: command not found`];

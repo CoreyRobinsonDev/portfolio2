@@ -37,13 +37,13 @@ const Input = () => {
   const handleChange = (e: any) => {
     const str = e.target.value;
     setValue(str);
-    setPlaceholder(cli.predictCommand(str)!)
+    setPlaceholder(cli.predictCommand(str))
   }
 
   return <form className={styles.container} onSubmit={() => cli.parseCommand(value)}>
     <p className={styles.path}>{path}</p>
     <p>$</p>
-    <p className={styles.placeholder} style={{left: `${value?.length + 3}.6ch`}}>{placeholder}</p>
+    <p className={styles.placeholder} style={{left: `${value?.length + path?.length + 2}.7ch`}}>{placeholder}</p>
     <input className={styles.input} type="text" value={value} onChange={(e) => handleChange(e)} onKeyUp={(e) => handleKeyUp(e)} autoFocus />
     </form>
 }
