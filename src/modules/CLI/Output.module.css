@@ -1,13 +1,11 @@
 .ascii__name { 
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: var(--red);
   width: 100%;
   text-align: center;
-  overflow: hidden;
 }
 
 .ascii__title {
-  overflow: hidden;
   font-size: 1rem;
   width: 100%;
   text-align:center;
@@ -17,10 +15,11 @@
 .ascii__intro {
   display: grid;
   place-items: center;
-  overflow: hidden;
   line-height: 2rem;
   width: 100%;
   color: var(--red);
+  overflow: clip;
+  padding-left: 8vw;
 }
 
 .scroll, .arrows {
@@ -29,7 +28,7 @@
   font-size: 3rem;
   color: var(--comment);
   opacity: 50%;
-  margin-top: 30rem;
+  margin-top: 20vh;
 }
 
 .arrows {
