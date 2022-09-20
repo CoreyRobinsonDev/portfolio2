@@ -40,7 +40,7 @@ const Input = () => {
     setPlaceholder(cli.predictCommand(str))
   }
 
-  return <form className={styles.container} onSubmit={() => cli.parseCommand(value)}>
+  return <form className={styles.container} action="/" onSubmit={() => cli.parseCommand(value)}>
     <p className={styles.path}>{path}</p>
     <p>$</p>
     <p className={styles.placeholder} style={{left: `${value?.length + path?.length + 2}.7ch`}}>{placeholder}</p>

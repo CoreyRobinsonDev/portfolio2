@@ -35,7 +35,7 @@ const Output = () => {
           <textarea className={styles.form__message} name="message" placeholder="Message..." value={item[2]} required />
           <input className={`${styles.form__submit}`} type="submit" value="Send" />
         </form>)}
-        {!specialCommands.includes(line?.command) && line.output?.map((item, key2) => <p className={styles.output} key={key2}>{item}</p>)}
+        {(!specialCommands.includes(line?.command) && !specialCommands.includes(line?.commandStr) )&& line.output?.map((item, key2) => <p className={styles.output} key={key2}>{item}</p>)}
         {line.output[0] === "" ? "" : <br/>}
       </span>)
     }

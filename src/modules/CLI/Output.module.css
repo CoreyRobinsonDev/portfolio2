@@ -15,9 +15,10 @@
 }
 
 .ascii__intro {
+  display: grid;
+  place-items: center;
   overflow: hidden;
   line-height: 2rem;
-  margin: 0 auto;
   width: 100%;
   color: var(--red);
 }
@@ -51,6 +52,10 @@
   color: var(--blue);
   text-decoration: underline;
   margin-bottom: 1rem;
+}
+
+.output__cat, .output__help, .output {
+  color: var(--comment);
 }
 
 .output__help {

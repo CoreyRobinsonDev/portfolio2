@@ -48,7 +48,6 @@ const Projects = () => {
     <div className={styles.projects}>
       {projects.map((project, key) => <Project key={key} project={project} />)}
     </div>
-    <h2 className={styles.title_container}><span className={styles.title}>Projects</span></h2>
   </section>
 }
 

@@ -28,13 +28,18 @@ button {
 li {
   list-style-type: none;
 }
+img {
+	max-width: 100%;
+	height: auto;
+}
 :root {
 	--main-bg-color: white;
   --border-color: #e45649;
-  --bg-color: #383a42;
-  --text-color: white;
+  --bg-color: whitesmoke;
+  --text-color: black;
 	--link-color: #0184bc;
 	--border-radius: 5px;
+	--box-shadow: -5px 5px 5px lightgrey;
 }
 
 body::-webkit-scrollbar {
@@ -48,6 +53,14 @@ body::-webkit-scrollbar-thumb {
 }
 
 main {
-	background-image: url("/public/pics/binaryImage.webp");
-	padding: 4rem 0;
+	background-image: url("/public/pics/binaryDark.webp");
+	padding-bottom: 20rem;
+}
+
+.main__title {
+	text-align: center;
+	background-color: #383a42;
+	color: white;
+	font-size: 10rem;
+	margin: 10rem 0;
 }

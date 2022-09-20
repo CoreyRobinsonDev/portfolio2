@@ -20,7 +20,8 @@ type Props = {
 
 const Project:React.FC<Props> = ({project}) => {
   const [onHover, setOnHover] = useState(false);
-  const mainClass = project.title === "Stonks" ? "--main" : "";
+  const mainProject = "Stonks";
+  const mainClass = project.title === mainProject ? "--main" : "";
  
   return <a className={`${styles.container} ${styles[mainClass]}`} href={project.site} target="_blank" rel="noreferrer" onMouseEnter={() => setOnHover(true)} onMouseLeave={() => setOnHover(false)}>
     <img className={styles.img} src={onHover ? project.gif : project.img} alt="" />
@@ -28,7 +29,7 @@ const Project:React.FC<Props> = ({project}) => {
       <h2 className={`${styles.title} ${styles["title" + mainClass]}`}>{project.title}</h2>
       <p className={styles.description}>{project.description}</p>
     </main>
-    <div className={styles.tech_container}>
+    <div className={styles.tech_container} style={{display: project.title !== mainProject ? "none" : "flex"}}>
       <h3 className={`${styles.tech_title} ${styles["tech_title" + mainClass]}`}>Technologies</h3>
       <div className={styles.tech__frontend}>
         <p>Front-End</p>

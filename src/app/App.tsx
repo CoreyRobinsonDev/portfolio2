@@ -13,8 +13,11 @@ function App() {
     <main>
     <Header />
       <About/>
+      <h2 id="projects" className="main__title">Projects</h2>
       <Projects />
+      <h2 id="skills" className="main__title">Skills</h2>
       <Skills />
+      <h2 id="contact" className="main__title">Contact</h2>
       <Contact/>
     </main>
     <Footer/>

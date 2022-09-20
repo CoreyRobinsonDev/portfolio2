@@ -1,30 +1,25 @@
 .container {
-  text-align: center;
   background-color: var(--bg-color);
-  margin: 2rem 9.2vw 0 10vw;
-  padding: 2rem;
-  box-shadow: -5px 5px 5px black;
 }
 
-.name {
-  font-weight: 300;
-  font-size: 8rem;
-  color: var(--text-color);
-  overflow: hidden;
+.list {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem 30vw;
+  font-weight: bold;
+  box-shadow: var(--box-shadow);
 }
 
-.lastName {
-  overflow: hidden;
-  font-weight: 800 ;
+.link {
+  color: black; 
+  font-size: 2.5rem;
+  padding: .3rem .5rem;
 }
 
-.title {
-  overflow: hidden;
-  color: var(--border-color);
-}
-
-@media only screen and (max-width: 1000px) {
-  .container {
-    margin: 0;
-  }
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: var(--bg-color);
+  z-index: 2;
 }

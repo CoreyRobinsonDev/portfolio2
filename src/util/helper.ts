@@ -26,6 +26,3 @@ export type History = {
   path: string []
 }
 
-export type Directories = {
-  
-}

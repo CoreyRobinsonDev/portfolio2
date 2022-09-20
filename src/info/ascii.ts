@@ -23,13 +23,13 @@ export const titleAscii = `
 
 
 export const introAscii = `
-                           +-----------------+  +--------------------------------------------------------------------------+  +----------------+
-                           +        ~        +  +                                   commands                               +  +    projects    +
-                           +-----------------+  +--------------------------------------------+-----------------------------+  +----------------+
-                           | /projects       |  | cat <file>                                 | output file contents        |  | stonks         |
-                           | about.txt       |  | cd projects                                | change to projects dir      |  | chess-openings |
-                           | skills.txt      |  | contact <your name> <your email> <message> | contacts me via email       |  | mars-gallery   |
-                           +-----------------+  | goto <project>                             | creates a link to <project> |  +----------------+
-                                                | help                                       | see list of commands        |  
-                                                +--------------------------------------------+-----------------------------+                                         
++-----------------+  +--------------------------------------------------------------------------+  +----------------+
++        ~        +  +                                   commands                               +  +    projects    +
++-----------------+  +--------------------------------------------+-----------------------------+  +----------------+
+| /projects       |  | cat <file>                                 | output file contents        |  | stonks         |
+| about.txt       |  | cd projects                                | change to projects dir      |  | chess-openings |
+| skills.txt      |  | contact <your name> <your email> <message> | contacts me via email       |  | mars-gallery   |
++-----------------+  | goto <project>                             | creates a link to <project> |  +----------------+
+                     | help                                       | see list of commands        |  
+                     +--------------------------------------------+-----------------------------+                                         
 `;

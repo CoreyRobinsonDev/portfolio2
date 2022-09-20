@@ -5,13 +5,11 @@ import { about, skills } from "../info/text";
 export class CLI {
   path: string[];
   history: History[];
-  currentDir: string;
   directories: any;
 
   constructor() {
     this.path = get("path") ? get("path") : create("path", ["~"]);
     this.history = get("history") ? get("history") : [];
-    this.currentDir = create("currentDir", this.path[this.path.length - 1]);
     this.directories = get("directories") ? get("directories") : {
       "~": {
         "projects": {
@@ -33,9 +31,6 @@ export class CLI {
     create("history", this.history);
   }
 
-  updateCurrentDir() {
-    create("currentDir", this.currentDir);
-  }
 
   updateDirectories() {
     create("directories", this.directories);
@@ -70,7 +65,6 @@ export class CLI {
       return `cd: ${dir}: No such file or directory`;
     };
     this.updatePath();
-    this.updateCurrentDir();
     return "";
   }
 
@@ -289,7 +283,7 @@ export class CLI {
           ["date", "- show the current date and time"],
           ["info", "- output this site's intro panel"],
           ["clear", "- clear commands"],
-          ["clearLocal", "- clear local history"]
+          ["clearLocal", "- clear local storage"]
         ]
         break;
       case "clear":

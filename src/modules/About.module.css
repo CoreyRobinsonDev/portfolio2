@@ -1,45 +1,80 @@
 .container {
-  display: grid;
-  grid-template-columns: 80vw 5vw;
-  place-items: center;
-  margin: 0 10vw;
-  color: var(--text-color);
+  margin: 0 5vw;
 }
 
 .about_section {
-  box-shadow: -5px 5px 5px black;
-  margin: 2rem 0;
+  display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+  gap: 2rem;
+  padding-top: 15rem;
+}
+
+.content {
+  box-shadow: var(--box-shadow);
   padding: 2rem;
   background-color: var(--bg-color);
   font-size: 2rem;
+  flex: 1 0 60%;
 }
 
-.about_section span {
-  width: fit-content;
-  font-style: italic;
-  font-weight: bold;
+.content h2 {
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+  border-bottom: 1rem solid;
 }
 
-.title_container {
-  transform: rotate(90deg);
-  letter-spacing: 1rem;
-  width: 10rem;
-}
 
-.title {
-  position: relative;
-  bottom: -1.3rem;
-  color: var(--bg-color);
-}
-
-.link_container {
+.link {
+  --opacity: 0%;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: space-between;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  flex: 0 1 20rem;
+  width: 100%;
 }
 
-.link_container a {
-  color: var(--link-color);
+.link:hover {
+  --opacity: 50%;
 }
+
+.link p {
+  background-color: var(--bg-color);
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: var(--text-color);
+  width: 100%;
+}
+
+.link__github {
+  box-shadow: var(--box-shadow);
+  background-image: url("/public/pics/github.webp");
+}
+
+.link__linkedin {
+  box-shadow: var(--box-shadow);
+  background-image: url("/public/pics/linkedin.webp");
+}
+
+.icon__github, .icon__linkedin {
+  opacity: var(--opacity);
+  transition: ease-in 300ms;
+  font-size: 15vw;
+}
+
+.icon__github {
+  color: white;
+}
+
+.icon__linkedin {
+  padding: 2rem;
+  color: black;
+}
+
 
 @media only screen and (max-width: 1000px) {
   .title_container {
@@ -48,6 +83,9 @@
 
   .container {
     display: flex;
-    margin: 0;
+  }
+
+  .link {
+    flex-basis: 100%;
   }
 }

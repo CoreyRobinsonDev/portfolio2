@@ -1,18 +1,19 @@
+import { AiFillGithub } from "react-icons/ai";
+import { BsLinkedin } from "react-icons/bs";
+
 import styles from "../modules/About.module.css";
 import { about } from "../info/text";
-import FX from "../modules/FX.module.css";
 
 const About = () => {
-  return <section className={styles.container}>
+  return <section id="about" className={styles.container}>
     <div className={styles.about_section}>
-      <p>Hi, I'm <span>Corey Robinson</span></p>
-      <p>{about}</p>
-      <div className={styles.link_container}>
-        <a className={FX.hover} href="https://github.com/CoreyRobinsonDev" target="_blank" rel="noreferrer">Github</a>
-        <a className={FX.hover} href="https://www.linkedin.com/in/coreycodes/" target="_blank" rel="noreferrer">LinkedIn</a>
-      </div>
+        <div className={styles.content}>
+          <h2>A little about me...</h2>
+          <p>{about}</p>
+        </div>
+        <a className={`${styles.link__github} ${styles.link}`} href="https://github.com/CoreyRobinsonDev" target="_blank" rel="noreferrer"><AiFillGithub className={styles.icon__github} /><p>GitHub</p></a>
+        <a className={`${styles.link__linkedin} ${styles.link}`} href="https://www.linkedin.com/in/coreycodes/" target="_blank" rel="noreferrer"><BsLinkedin className={styles.icon__linkedin} /><p>LinkedIn</p></a>
     </div>
-    <h2 className={styles.title_container}><span className={styles.title}>About</span></h2>
   </section>
 }
 

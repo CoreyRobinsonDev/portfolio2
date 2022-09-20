@@ -59,7 +59,7 @@ const AnimatedOutput = () => {
       <motion.textarea variants={child} className={styles.form__message} name="message" placeholder="Message..." value={item[2]} required />
       <motion.input variants={child} className={`${styles.form__submit}`} type="submit" value="Send" />
     </motion.form>)}
-    {!specialCommands.includes(line?.command) && line?.output?.map((item, key2) => <motion.p variants={container} initial="hidden" animate="visible"className={styles.output} key={key2}>{item?.split("").map(ch => <motion.span variants={child}>{ch}</motion.span>)}</motion.p>)}
+    {(!specialCommands.includes(line?.command) && !specialCommands.includes(line?.commandStr)) && line?.output?.map((item, key2) => <motion.p variants={container} initial="hidden" animate="visible"className={styles.output} key={key2}>{item?.split("").map(ch => <motion.span variants={child}>{ch}</motion.span>)}</motion.p>)}
     {line?.output[0] === "" ? "" : <br/>}
     </>}
   </>
